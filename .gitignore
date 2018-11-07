@@ -3,3 +3,8 @@
 ################################################################################
 
 /CSharpAlgorithmsLibrary/.vs/CSharpAlgorithmsLibrary/v15/Server/sqlite3
+/CSharpAlgorithmsLibrary/packages
+/CSharpAlgorithmsLibrary/StringAlgorithmsTests/obj/Debug
+/CSharpAlgorithmsLibrary/StringAlgorithms/obj/Debug
+/CSharpAlgorithmsLibrary/MatrixAlgorithms/obj/Debug
+/CSharpAlgorithmsLibrary/MatrixAlgorithmsTests/obj/Debug
