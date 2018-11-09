@@ -1172,5 +1172,370 @@ namespace StringAlgorithms
 
             return result;
         }
+
+        public int FindMin(int[] num)
+        {
+            return FindMin(num, 0, num.Length - 1);
+        }
+
+        public int FindMin(int[] num, int left, int right)
+        {
+            if (left == right)
+                return num[left];
+            if ((right - left) == 1)
+                return Math.Min(num[left], num[right]);
+
+            int middle = left + (right - left) / 2;
+
+            if (num[left] < num[right])
+            {
+                return num[left];
+
+            }
+            else if (num[middle] > num[left])
+            {
+                return FindMin(num, middle, right);
+
+            }
+            else
+            {
+                return FindMin(num, left, middle);
+            }
+        }
+
+        public int Search(int[] nums, int target)
+        {
+            return BinarySearch(nums, 0, nums.Length - 1, target);
+        }
+
+        public int BinarySearch(int[] nums, int left, int right, int target)
+        {
+            if (left > right)
+                return -1;
+
+            int mid = left + (right - left) / 2;
+
+            if (target == nums[mid])
+                return mid;
+
+            if (nums[left] <= nums[mid])
+            {
+                if (nums[left] <= target && target < nums[mid])
+                {
+                    return BinarySearch(nums, left, mid - 1, target);
+                }
+                else
+                {
+                    return BinarySearch(nums, mid + 1, right, target);
+                }
+            }
+            else
+            {
+                if (nums[mid] < target && target <= nums[right])
+                {
+                    return BinarySearch(nums, mid + 1, right, target);
+                }
+                else
+                {
+                    return BinarySearch(nums, left, mid - 1, target);
+                }
+            }
+        }
+
+        public bool SearchInRotatedSortedArray(int[] nums, int target)
+        {
+            int left = 0;
+            int right = nums.Length - 1;
+
+            while (left <= right)
+            {
+                int mid = (left + right) / 2;
+                if (nums[mid] == target)
+                    return true;
+
+                if (nums[left] < nums[mid])
+                {
+                    if (nums[left] <= target && target < nums[mid])
+                    {
+                        right = mid - 1;
+                    }
+                    else
+                    {
+                        left = mid + 1;
+                    }
+                }
+                else if (nums[left] > nums[mid])
+                {
+                    if (nums[mid] < target && target <= nums[right])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid - 1;
+                    }
+                }
+                else
+                {
+                    left++;
+                }
+            }
+
+            return false;
+        }
+
+        public class MinStack
+        {
+            readonly Stack<Tuple<int, int>> _mystack = new Stack<Tuple<int, int>>();
+            public void Push(int x)
+            {
+                if (GetMin() == int.MinValue)
+                {
+                    var newNode = new Tuple<int, int>(x, x);
+                    _mystack.Push(newNode);
+                }
+                else
+                {
+                    var newNode = new Tuple<int, int>(x, Math.Min(x, GetMin()));
+                    _mystack.Push(newNode);
+                }
+            }
+
+            public void Pop()
+            {
+                _mystack.Pop();
+            }
+
+            public int Top()
+            {
+                if (_mystack.Count == 0)
+                {
+                    return int.MinValue;
+                }
+
+                return _mystack.Peek().Item1;
+            }
+
+            public int GetMin()
+            {
+                if (_mystack.Count == 0)
+                {
+                    return int.MinValue;
+                }
+
+                return _mystack.Peek().Item2;
+            }
+        }
+
+        public int MajorityElement(int[] num)
+        {
+            if (num.Length == 1)
+            {
+                return num[0];
+            }
+
+            Array.Sort(num);
+            return num[num.Length / 2];
+        }
+
+        public String GetHint(String secret, String guess)
+        {
+            int countBull = 0;
+            int countCow = 0;
+
+            Dictionary<char, Int32> map = new Dictionary<char, Int32>();
+
+            //check bull
+            for (int i = 0; i < secret.Length; i++)
+            {
+                char c1 = secret[i];
+                char c2 = guess[i];
+
+                if (c1 == c2)
+                {
+                    countBull++;
+                }
+                else
+                {
+                    if (map.ContainsKey(c1))
+                    {
+                        int freq = map[c1];
+                        freq++;
+                        map.Add(c1, freq);
+                    }
+                    else
+                    {
+                        map.Add(c1, 1);
+                    }
+                }
+            }
+
+            //check cow
+            for (int i = 0; i < secret.Length; i++)
+            {
+                char c1 = secret[i];
+                char c2 = guess[i];
+
+                if (c1 != c2)
+                {
+                    if (map.ContainsKey(c2))
+                    {
+                        countCow++;
+                        if (map[c2] == 1)
+                        {
+                            map.Remove(c2);
+                        }
+                        else
+                        {
+                            int freq = map[c2];
+                            freq--;
+                            map.Add(c2, freq);
+                        }
+                    }
+                }
+            }
+
+            return countBull + "A" + countCow + "B";
+        }
+
+        public int LargestRectangleArea(int[] height)
+        {
+            if (height == null || height.Length == 0)
+            {
+                return 0;
+            }
+
+            Stack<Int32> stack = new Stack<Int32>();
+
+            int max = 0;
+            int i = 0;
+
+            while (i < height.Length)
+            {
+                //push index to stack when the current height is larger than the previous one
+                if (stack.Any() || height[i] >= height[stack.Peek()])
+                {
+                    stack.Push(i);
+                    i++;
+                }
+                else
+                {
+                    //calculate max value when the current height is less than the previous one
+                    int p = stack.Pop();
+                    int h = height[p];
+                    int w = stack.Any() ? i : i - stack.Peek() - 1;
+                    max = Math.Max(h * w, max);
+                }
+
+            }
+
+            while (!stack.Any())
+            {
+                int p = stack.Pop();
+                int h = height[p];
+                int w = stack.Any() ? i : i - stack.Peek() - 1;
+                max = Math.Max(h * w, max);
+            }
+
+            return max;
+        }
+
+        public String LongestCommonPrefix(String[] strs)
+        {
+            if (strs == null || strs.Length == 0)
+            {
+                return "";
+            }
+
+            if (strs.Length == 1)
+                return strs[0];
+
+            int minLen = strs.Length + 1;
+
+            foreach (String str in strs)
+            {
+                if (minLen > str.Length)
+                {
+                    minLen = str.Length;
+                }
+            }
+
+            for (int i = 0; i < minLen; i++)
+            {
+                for (int j = 0; j < strs.Length - 1; j++)
+                {
+                    String s1 = strs[j];
+                    String s2 = strs[j + 1];
+                    if (s1[i] != s2[i])
+                    {
+                        return s1.Substring(0, i);
+                    }
+                }
+            }
+
+            return strs[0].Substring(0, minLen);
+        }
+
+        public static int GetLargest(int[] numbers)
+        {
+            if (numbers.Length == 1)
+            {
+                return numbers[0];
+            }
+            else
+            {
+                int largest = 0;
+                for (int i = 0; i < numbers.Length; i++)
+                {
+                    int[] other = numbers.Take(i).Concat(numbers.Skip(i + 1)).ToArray();
+                    int n = Int32.Parse(numbers[i].ToString() + GetLargest(other).ToString());
+                    if (i == 0 || n > largest)
+                    {
+                        largest = n;
+                    }
+                }
+                return largest;
+            }
+        }
+
+        public int CompareVersion(String version1, String version2)
+        {
+            string[] arr1 = version1.Split(new char[] { '\\' , ',' });
+            string[] arr2 = version2.Split(new char[] { '\\' , ',' });
+
+            int i = 0;
+            while (i < arr1.Length || i < arr2.Length)
+            {
+                if (i < arr1.Length && i < arr2.Length)
+                {
+                    if (Int32.Parse(arr1[i]) < Int32.Parse(arr2[i]))
+                    {
+                        return -1;
+                    }
+                    else if (Int32.Parse(arr1[i]) > Int32.Parse(arr2[i]))
+                    {
+                        return 1;
+                    }
+                }
+                else if (i < arr1.Length)
+                {
+                    if (Int32.Parse(arr1[i]) != 0)
+                    {
+                        return 1;
+                    }
+                }
+                else if (i < arr2.Length)
+                {
+                    if (Int32.Parse(arr2[i]) != 0)
+                    {
+                        return -1;
+                    }
+                }
+
+                i++;
+            }
+
+            return 0;
+        }
     }
 }
