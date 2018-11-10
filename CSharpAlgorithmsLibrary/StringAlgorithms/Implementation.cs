@@ -11,7 +11,7 @@ namespace StringAlgorithms
     {
 
 
-        public void Rotate(int[] array, int k)
+        public int[] Rotate(int[] array, int k)
         {
             if (k > array.Length)
             {
@@ -34,6 +34,8 @@ namespace StringAlgorithms
             }
 
             Array.Copy(resultado, 0, array, 0, array.Length);
+
+            return resultado;
         }
 
         public void Reverse(string s)
@@ -2974,10 +2976,11 @@ namespace StringAlgorithms
         public string GuessNumber(int n)
         {
             string str = "";
+            int g = 0;
 
             while (n != g)
             {
-                int g = Convert.ToInt32(Console.ReadKey());
+                g = Convert.ToInt32(Console.ReadKey());
 
                 if (g<n)
                 {
