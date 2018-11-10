@@ -2974,10 +2974,10 @@ namespace StringAlgorithms
         public string GuessNumber(int n)
         {
             string str = "";
-
+            int g = 0;
             while (n != g)
             {
-                int g = Convert.ToInt32(Console.ReadKey());
+                g = Convert.ToInt32(Console.ReadKey());
 
                 if (g<n)
                 {
