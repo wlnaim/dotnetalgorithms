@@ -11,7 +11,7 @@ namespace StringAlgorithms
     {
 
 
-        public void Rotate(int[] array, int k)
+        public int[] Rotate(int[] array, int k)
         {
             if (k > array.Length)
             {
@@ -34,6 +34,8 @@ namespace StringAlgorithms
             }
 
             Array.Copy(resultado, 0, array, 0, array.Length);
+
+            return resultado;
         }
 
         public void Reverse(string s)
@@ -2975,6 +2977,7 @@ namespace StringAlgorithms
         {
             string str = "";
             int g = 0;
+
             while (n != g)
             {
                 g = Convert.ToInt32(Console.ReadKey());
