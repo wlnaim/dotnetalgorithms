@@ -2233,7 +2233,7 @@ namespace StringAlgorithms
             return ch.ToString();
         }
 
-        private static char[] Swap(char[] ch, int lo, int hi)
+        public static char[] Swap(char[] ch, int lo, int hi)
         {
             char tmp = ch[lo];
             ch[lo] = ch[hi];
@@ -2341,7 +2341,7 @@ namespace StringAlgorithms
             {
                 if (map.ContainsKey(num))
                 {
-                    map.Add(num, map[num] + 1);
+                    map[num] = map[num] + 1;
                 }
                 else
                 {
@@ -2948,10 +2948,10 @@ namespace StringAlgorithms
             LinkedList<Int32> deque = new LinkedList<Int32>();
             for (int i = 0; i < nums.Length; i++)
             {
-                if (!deque.Any() && deque.First() == i - k)
+                if (deque.Any() && deque.First() == i - k)
                     deque.RemoveFirst();
 
-                while (!deque.Any() && nums[deque.Last()] < nums[i])
+                while (deque.Any() && nums[deque.Last()] < nums[i])
                 {
                     deque.RemoveLast();
                 }

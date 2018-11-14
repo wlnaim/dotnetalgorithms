@@ -367,6 +367,398 @@ namespace StringAlgorithmsTests
             Assert.IsTrue(true);
         }
 
+        [TestMethod]
+        public void GetHint()
+        {
+            string secret = "";
+            string guess = "";
 
+            var Atoi = stringAlg.GetHint(secret,guess);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void LargestRectangleArea()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.LargestRectangleArea(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void LongestCommonPrefix()
+        {
+
+            string[] ss = {
+                "usted",
+                "me",
+                "regaló",
+                "la vida"
+            };
+            var Atoi = stringAlg.LongestCommonPrefix(ss);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void GetLargest()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = Implementation.GetLargest(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void CompareVersion()
+        {
+            string secret = "1.01";
+            string guess = "2.00";
+
+            var Atoi = stringAlg.CompareVersion(secret, guess);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void Simplify()
+        {
+            string path = " / home//foo/";
+
+            var Atoi = stringAlg.Simplify(path);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void SearchRange()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.SearchRange(arr,2);
+            Assert.IsTrue(true);
+        }
+
+
+        [TestMethod]
+        public void CountAndSay()
+        {
+            var Atoi = stringAlg.CountAndSay(15);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void Trap()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.Trap(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void Candy()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.Candy(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void MaxWaterVolume()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.MaxWaterVolume(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void GeneratePascalTriangle()
+        {
+            var Atoi = stringAlg.GeneratePascalTriangle(15);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void CanCompleteCircuit()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            int[] arr2 = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.CanCompleteCircuit(arr,arr2);
+            Assert.IsTrue(true);
+        }
+        
+        [TestMethod]
+        public void Calculate()
+        {
+            string path = "(1-(4-5))";
+
+            var Atoi = stringAlg.Calculate(path);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void GroupAnagrams()
+        {
+
+            string[] ss = {
+                "usted",
+                "me",
+                "regaló",
+                "la vida"
+            };
+            var Atoi = stringAlg.GroupAnagrams(ss);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void ShortestPalindrome()
+        {
+            string path = "(1-(4-5))";
+
+            var Atoi = stringAlg.ShortestPalindrome(path);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void ComAddeArea()
+        {
+            var Atoi = stringAlg.ComAddeArea(1,2,3,4,5,6,7,8);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void SummaryRanges()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.SummaryRanges(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void IncreasingTriplet()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.IncreasingTriplet(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void IsReachable()
+        {
+            List<Int32> arr = new List<int>()
+            {
+                1,
+                2,
+                3,
+                0,
+                5,
+                6,
+                8,
+                10,
+                12
+            };
+            var Atoi = Implementation.IsReachable(arr,40);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void ReverseVowels()
+        {
+            string path = "Murcielago";
+
+            var Atoi = Implementation.ReverseVowels(path);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void Swap()
+        {
+            string path = "Murcielago";
+            char[] charr = path.ToCharArray();
+
+            var Atoi = Implementation.Swap(charr,0,path.Length-1);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void GeneratePossibleNextMoves()
+        {
+            string path = "Murcielago";
+
+            var Atoi = stringAlg.GeneratePossibleNextMoves(path);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void MissingMathNumber()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.MissingMathNumber(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void MissingBitNumber()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.MissingBitNumber(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void MissingBinaryNumber()
+        {
+            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.MissingBinaryNumber(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void IsAnagram()
+        {
+            string arr = "funeral";
+            string ar = "real fun";
+
+            var Atoi = stringAlg.IsAnagram(arr,ar);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void TopKFrequent()
+        {
+            int[] arr = { 1, 2, 3, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.TopKFrequent(arr,2);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void FindPeakElement()
+        {
+            int[] arr = { 1, 2, 3, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.FindPeakElement(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void WordPattern()
+        {
+            string arr = "funeral";
+            string ar = "fun";
+
+            var Atoi = stringAlg.WordPattern(ar, arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void HIndex()
+        {
+            int[] arr = { 1, 2, 3, 3, 0, 5, 6, 8, 10, 12 };
+            var Atoi = stringAlg.HIndex(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void PalindromePairs()
+        {
+            string[] arr = {
+                "bat",
+                "tab",
+                "cat"
+            };
+            var Atoi = stringAlg.PalindromePairs(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void IsOneEditDistance()
+        {
+            string arr = "funeral";
+            string ar = "fun";
+
+            var Atoi = stringAlg.IsOneEditDistance(ar, arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void IsScramble()
+        {
+            string arr = "funeral";
+            string ar = "fun";
+
+            var Atoi = stringAlg.IsScramble(ar, arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void NumberToWords()
+        {
+            var Atoi = stringAlg.NumberToWords(99);
+            var Atoi2 = stringAlg.Int2Str(99);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void FullJustify()
+        {
+            string[] arr = {
+                "bat",
+                "tab",
+                "cat",
+                "no",
+                "era",
+                "raro",
+                "verla",
+                "en",
+                "el",
+                "jardín",
+                "corriendo tras de mí"
+            };
+            var Atoi = stringAlg.FullJustify(arr,15);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void RemoveInvalidParentheses()
+        {
+            string arr = "funeral)";
+        
+
+            var Atoi = stringAlg.RemoveInvalidParentheses(arr);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void Intersection()
+        {
+            int[] arr = { 1, 2, 3, 3, 0, 5, 6, 8, 10, 12 };
+            int[] arr2 = { 1, 2, 3, 3, 0, 5, 6, 7, 11, 15, 8, 10, 12 };
+            var Atoi = stringAlg.Intersection(arr,arr2);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void MaxSlidingWindow()
+        {
+            int[] arr2 = { 1, 2, 3, 3, 0, 5, 6, 7, 11, 15, 8, 10, 12 };
+            var Atoi = stringAlg.MaxSlidingWindow(arr2,5);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void Next()
+        {
+            int[] arr2 = { 1, 2, 3, 3, 0, 5, 6, 7, 11, 15, 8, 10, 12 };
+            LinkedList<Int32> ll = new LinkedList<Int32>();
+            foreach (int a in arr2)
+            {
+                ll.AddLast(a);
+            }
+          
+            var Atoi = stringAlg.Next(123, 5);
+            Assert.IsTrue(true);
+        }
+
+        [TestMethod]
+        public void GuessNumber()
+        {
+            var Atoi = stringAlg.GuessNumber( 5);
+            Assert.IsTrue(true);
+
+        }
     }
 }
