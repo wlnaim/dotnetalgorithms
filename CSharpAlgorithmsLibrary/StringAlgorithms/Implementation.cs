@@ -38,9 +38,11 @@ namespace StringAlgorithms
             return resultado;
         }
 
-        public void Reverse(string s)
+        public string Reverse(string s)
         {
-            var outAdd = string.Join(" ", s.Split(' ').Reverse());
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
         }
 
         public int Rpn(String[] tokens)
@@ -159,8 +161,10 @@ namespace StringAlgorithms
                     if (top.numSteps == minStep && minStep != 0)
                     {
                         //nothing
-                        List<String> t = new List<String>();
-                        t.Add(top.word);
+                        List<String> t = new List<String>
+                        {
+                            top.word
+                        };
                         while (top.pre != null)
                         {
                             t.Insert(0, top.pre.word);
@@ -200,7 +204,7 @@ namespace StringAlgorithms
                     }
                 }
             }
-
+            
             return result;
         }
 
@@ -416,9 +420,9 @@ namespace StringAlgorithms
             return (int)result;
         }
 
-        public void Merge(int[] A, int m, int[] B, int n)
+        public int[] Merge(int[] A, int m, int[] B, int n)
         {
-
+            
             while (m > 0 && n > 0)
             {
                 if (A[m - 1] > B[n - 1])
@@ -438,6 +442,8 @@ namespace StringAlgorithms
                 A[m + n - 1] = B[n - 1];
                 n--;
             }
+
+            return A;
         }
 
         public bool IsValid(String s)
@@ -962,7 +968,7 @@ namespace StringAlgorithms
             return i;
         }
 
-        public void MoveZeroes(int[] nums)
+        public int[] MoveZeroes(int[] nums)
         {
             int m = -1;
 
@@ -986,6 +992,7 @@ namespace StringAlgorithms
                     }
                 }
             }
+            return nums;
         }
 
         public int LengthOfLongestSubstring(String s)
@@ -1058,7 +1065,7 @@ namespace StringAlgorithms
 
                 for (int i = j; i <= s.Length - len; i = i + len)
                 {
-                    String sub = s.Substring(i, i + len);
+                    String sub = s.Substring(i, len);
                     if (map.ContainsKey(sub))
                     {
                         if (currentMap.ContainsKey(sub))
@@ -1074,7 +1081,7 @@ namespace StringAlgorithms
 
                         while (currentMap[sub] > map[sub])
                         {
-                            String left = s.Substring(start, start + len);
+                            String left = s.Substring(start, len - start);
                             currentMap.Add(left, currentMap[left] - 1);
 
                             count--;
@@ -1086,7 +1093,7 @@ namespace StringAlgorithms
                         {
                             result.Add(start); 
 
-                            String left = s.Substring(start, start + len);
+                            String left = s.Substring(start,len -  start);
                             currentMap.Add(left, currentMap[left] - 1);
                             count--;
                             start = start + len;
@@ -1144,7 +1151,16 @@ namespace StringAlgorithms
                         {
                             count++;
                         }
-                        map.Add(c, map[c] + 1);
+
+                        if (map.ContainsKey(c))
+                        {
+                            map[c] = map[c] + 1;
+                        }
+                        else
+                        {
+                            map.Add(c, map[c] + 1);
+
+                        }
                     }
                     else
                     {
@@ -1159,14 +1175,16 @@ namespace StringAlgorithms
                     while (!map.ContainsKey(sc) || map[sc] > target[sc])
                     {
                         if (map.ContainsKey(sc) && map[sc] > target[sc])
-                            map.Add(sc, map[sc] - 1);
+                        {
+                            map[sc] = map[sc] - 1;
+                        }
                         left++;
                         sc = s[left];
                     }
 
                     if (i - left + 1 < minLen)
                     {
-                        result = s.Substring(left, i + 1);
+                        result = s.Substring(left, i + 1 - left);
                         minLen = i - left + 1;
                     }
                 }
@@ -1617,16 +1635,16 @@ namespace StringAlgorithms
             return arr;
         }
 
-        public void BinarySearch(int[] nums, int left, int right, int target, int[] arr)
+        public int[] BinarySearch(int[] nums, int left, int right, int target, int[] arr)
         {
             if (right < left)
-                return;
+                return arr;
 
             if (nums[left] == nums[right] && nums[left] == target)
             {
                 arr[0] = left;
                 arr[1] = right;
-                return;
+                return arr;
             }
 
             int mid = left + (right - left) / 2;
@@ -1660,8 +1678,9 @@ namespace StringAlgorithms
                     t2++;
                     arr[1] = t2;
                 }
-                return;
+                
             }
+            return arr;
         }
 
         public String CountAndSay(int n)
@@ -2214,11 +2233,13 @@ namespace StringAlgorithms
             return ch.ToString();
         }
 
-        private static void Swap(char[] ch, int lo, int hi)
+        private static char[] Swap(char[] ch, int lo, int hi)
         {
             char tmp = ch[lo];
             ch[lo] = ch[hi];
             ch[hi] = tmp;
+
+            return ch;
         }
 
         public List<String> GeneratePossibleNextMoves(String s)
@@ -2634,11 +2655,11 @@ namespace StringAlgorithms
             for (int i = 1; i < s1.Length; i++)
             {
                 String s11 = s1.Substring(0, i);
-                String s12 = s1.Substring(i, s1.Length);
+                String s12 = s1.Substring(i, s1.Length-i);
                 String s21 = s2.Substring(0, i);
-                String s22 = s2.Substring(i, s2.Length);
+                String s22 = s2.Substring(i, s2.Length-i);
                 String s23 = s2.Substring(0, s2.Length - i);
-                String s24 = s2.Substring(s2.Length - i, s2.Length);
+                String s24 = s2.Substring(s2.Length - i, s2.Length - (s2.Length - i));
 
                 if (IsScramble(s11, s21) && IsScramble(s12, s22))
                     return true;
@@ -2820,7 +2841,7 @@ namespace StringAlgorithms
                 }
             }
 
-            int lastLen = 0;
+         //   int lastLen = 0;
             StringBuilder sb = new StringBuilder();
 
             for (int i = last; i < words.Length - 1; i++)
@@ -2830,7 +2851,7 @@ namespace StringAlgorithms
             }
 
             sb.Append(words[words.Length - 1]);
-            int d = 0;
+         //   int d = 0;
             while (sb.Length < maxWidth)
             {
                 sb.Append(" ");
