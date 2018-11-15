@@ -30,6 +30,7 @@ namespace StringAlgorithmsTests
         {
             string s = "Hola mundo";
             var res = stringAlg.Reverse(s);
+            Assert.IsTrue(res.Equals("odnum aloH"));
         }
 
         [TestMethod]
@@ -45,8 +46,11 @@ namespace StringAlgorithmsTests
         {
             string s = "odd";
             string t = "egg";
+            string l = "jäger";
             var ban = stringAlg.IsIsomorphic(s, t);
+            var banana = stringAlg.IsIsomorphic(s, l);
             Assert.IsTrue(ban);
+            Assert.IsFalse(banana);
         }
 
         [TestMethod]
@@ -56,9 +60,8 @@ namespace StringAlgorithmsTests
             HashSet<String> dict = new HashSet<string>(ladderWords);
 
             var ladder = stringAlg.FindLAdders("hit", "cog", dict);
+            Assert.IsTrue(true);
 
-
-            Console.WriteLine(ladderWords);
         }
 
         [TestMethod]
@@ -85,7 +88,7 @@ namespace StringAlgorithmsTests
             inter.Add(int1);
             inter.Add(int2);
             var merged = stringAlg.Merge(inter);
-            Assert.IsTrue(true);
+            Assert.IsTrue(merged[0].start == int1.start && merged[0].end == int2.end);
         }
 
         [TestMethod]
@@ -93,7 +96,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5 };
             var twoSum = stringAlg.TwoSum(arr, 9);
-            Assert.IsTrue(true);
+            Assert.IsTrue(arr[twoSum[0]] + arr[twoSum[1]] == 9);
         }
 
         [TestMethod]
@@ -101,7 +104,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5 };
             var threeSum = stringAlg.ThreeSumClosest(arr, 9);
-            Assert.IsTrue(true);
+            Assert.IsTrue(threeSum==9);
         }
 
         [TestMethod]
@@ -109,7 +112,7 @@ namespace StringAlgorithmsTests
         {
             string s = "1234";
             var Atoi = stringAlg.Atoi(s);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Convert.ToInt32(s)==Atoi);
         }
 
         [TestMethod]
@@ -117,16 +120,19 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5 };
             int[] arr2 = { 3, 4, 5, 6, 10 };
-            var threeSum = stringAlg.Merge(arr, 2, arr2, 2);
-            Assert.IsTrue(true);
+            var threeSum = stringAlg.Merge(arr, arr.Length, arr2, arr2.Length);
+            Assert.IsTrue(threeSum.Length == arr.Length + arr2.Length && threeSum[0] == arr[0] && threeSum[threeSum.Length-1]== arr2[arr2.Length-1]);
         }
 
         [TestMethod]
         public void IsValid()
         {
             string s = "{}{}{}{}{}{[]]]][";
-            var Atoi = stringAlg.IsValid(s);
-            Assert.IsTrue(true);
+            string t = "{}[]()";
+            var isntValid = stringAlg.IsValid(s);
+            var isValid = stringAlg.IsValid(t);
+            Assert.IsTrue(isValid);
+            Assert.IsFalse(isntValid);
         }
 
         [TestMethod]
@@ -134,7 +140,7 @@ namespace StringAlgorithmsTests
         {
             string s = "()()()()()()()()()))";
             var threeSum = Implementation.LongestValidParentheses(s);
-            Assert.IsTrue(true);
+            Assert.IsTrue(threeSum == 18);
         }
 
         [TestMethod]
@@ -143,15 +149,15 @@ namespace StringAlgorithmsTests
             string s = "12lksdñfasñfjsdlkdjalkfjsdfasddfsdf34";
             string t = "f34";
             var Atoi = stringAlg.StrStr(s, t);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==34);
         }
 
         [TestMethod]
         public void MinSubArrayLen()
         {
             int[] arr = { 1, 2, 3, 4, 5 };
-            var threeSum = stringAlg.ThreeSumClosest(arr, 9);
-            Assert.IsTrue(true);
+            var threeSum = stringAlg.MinSubArrayLen(15,arr);
+            Assert.IsTrue(threeSum==5);
         }
 
         [TestMethod]
@@ -159,7 +165,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 7 };
             var Atoi = stringAlg.SearchInsert(arr, 6);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==4);
         }
         
         [TestMethod]
@@ -168,7 +174,7 @@ namespace StringAlgorithmsTests
             
             int[] arr = { 100, 200, 3, 4, 5 };
             var lc = Implementation.LongestConsecutive(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(lc==3);
         }
 
         [TestMethod]
@@ -176,15 +182,15 @@ namespace StringAlgorithmsTests
         {
             string s = "4321234";
             var Atoi = stringAlg.IsPalindrome(s);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi);
         }
 
         [TestMethod]
         public void ZigZagConvert()
         {
             int[] arr = { 1, 2, 3, 4, 5 };
-            var threeSum = stringAlg.ZigZagConvert("sñlasjdfñljsdfñlsflkx", 9);
-            Assert.IsTrue(true);
+            var threeSum = stringAlg.ZigZagConvert("PAYPALISHIRING", 3);
+            Assert.IsTrue(threeSum.Equals("PAHNAPLSIIGYIR"));
         }
 
         [TestMethod]
@@ -192,7 +198,7 @@ namespace StringAlgorithmsTests
         {
             string s = "11010";
             var Atoi = stringAlg.AddBinary(s,"11000101");
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Equals("11111011"));
         }
 
         [TestMethod]
@@ -200,7 +206,7 @@ namespace StringAlgorithmsTests
         {
             string arr = "Bienvenidos sean a probar un poco de ácido desoxirribonucleico";
             var threeSum = stringAlg.LengthOfLastWord(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue("desoxirribonucleico".Length==threeSum);
         }
 
         [TestMethod]
@@ -227,7 +233,7 @@ namespace StringAlgorithmsTests
             };
             
             var Atoi = stringAlg.MinimumTotal(li);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==14);
         }
 
         [TestMethod]
@@ -235,7 +241,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5,3 };
             var threeSum = stringAlg.ContainsDuplicate(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(threeSum);
         }
 
         [TestMethod]
@@ -243,7 +249,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5,5 };
             var Atoi = stringAlg.ContainsNearbyDuplicate(arr,2);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi);
         }
 
         [TestMethod]
@@ -251,7 +257,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5, 5 };
             var Atoi = stringAlg.ContainsNearbyAlmostDuplicate(arr, 2,1);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi);
         }
 
         [TestMethod]
@@ -259,7 +265,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5, 5 };
             var Atoi = stringAlg.RemoveDuplicatesNaive(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==5);
         }
 
         [TestMethod]
@@ -267,7 +273,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5, 5 };
             var Atoi = stringAlg.RemoveDuplicatesNaive(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==5);
         }
 
         [TestMethod]
@@ -275,38 +281,37 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 4, 5, 5 };
             var Atoi = stringAlg.RemoveElement(arr,2);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==5);
         }
 
         [TestMethod]
         public void MoveZeroes()
         {
-            int[] arr = { 1, 2, 3, 4, 5, 5,0,0,0 };
+            int[] arr = { 1, 0, 0, 0,1, 2, 3, 4, 5, 5 };
             var Atoi = stringAlg.MoveZeroes(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi[8]==0);
         }
 
         [TestMethod]
         public void LengthOfLongestSubstring()
         {
-            string s = "11010";
+            string s = "11010 a";
             var Atoi = stringAlg.LengthOfLongestSubstring(s);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==4);
         }
 
         [TestMethod]
         public void FindSubstring()
         {
-            string s = "11010";
+            string s = "barfoothefoobarman";
 
             string[] ss = {
-                "usted",
-                "me",
-                "regaló",
-                "la vida"
+                "foo",
+                "bar",
+                
             };
             var Atoi = stringAlg.FindSubstring(s,ss);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi[1]==9);
         }
 
         [TestMethod]
@@ -315,7 +320,7 @@ namespace StringAlgorithmsTests
             string t = "ABC";
             string s = "ADOBECODEBANC";
             var Atoi = stringAlg.MinWindow(s,t);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Equals("BANC"));
         }
 
         [TestMethod]
@@ -326,8 +331,10 @@ namespace StringAlgorithmsTests
             int t = 6;
             var Atoi = stringAlg.FindMin(arr);
             var duplicatesAllowed = stringAlg.FindMin(arr,s,t);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==1&&duplicatesAllowed==5);
         }
+
+
 
         [TestMethod]
         public void Search()
@@ -335,7 +342,7 @@ namespace StringAlgorithmsTests
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             int s = 4;
             var Atoi = stringAlg.Search(arr, s);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==-1);
         }
 
         [TestMethod]
@@ -356,7 +363,7 @@ namespace StringAlgorithmsTests
            
             int l = 3;
             var Atoi = stringAlg.SearchInRotatedSortedArray(arr, l);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi);
         }
 
         [TestMethod]
@@ -364,14 +371,14 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.MajorityElement(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==5);
         }
 
         [TestMethod]
         public void GetHint()
         {
-            string secret = "";
-            string guess = "";
+            string secret = "1807";
+            string guess = "7810";
 
             var Atoi = stringAlg.GetHint(secret,guess);
             Assert.IsTrue(true);
@@ -382,7 +389,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.LargestRectangleArea(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==25);
         }
 
         [TestMethod]
@@ -390,21 +397,21 @@ namespace StringAlgorithmsTests
         {
 
             string[] ss = {
-                "usted",
                 "me",
-                "regaló",
-                "la vida"
+                "me",
+                "meregaló",
+                "mela vida"
             };
             var Atoi = stringAlg.LongestCommonPrefix(ss);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Equals("me"));
         }
 
         [TestMethod]
         public void GetLargest()
         {
-            int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
+            int[] arr = { 1, 2, 3, 0 };
             var Atoi = Implementation.GetLargest(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi == 3210);
         }
 
         [TestMethod]
@@ -414,16 +421,18 @@ namespace StringAlgorithmsTests
             string guess = "2.00";
 
             var Atoi = stringAlg.CompareVersion(secret, guess);
-            Assert.IsTrue(true);
+            var Atoi2 = stringAlg.CompareVersion(guess, secret);
+            var Atoi3 = stringAlg.CompareVersion(secret, secret);
+            Assert.IsTrue(Atoi==-1&&Atoi2==-1&&Atoi3==0);
         }
 
         [TestMethod]
         public void Simplify()
         {
-            string path = " / home//foo/";
+            string path = "/home//foo/";
 
             var Atoi = stringAlg.Simplify(path);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Equals("/home/foo"));
         }
 
         [TestMethod]
@@ -431,12 +440,12 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.SearchRange(arr,2);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi[0] == 1);
         }
 
 
         [TestMethod]
-        public void CountAndSay()
+        public void CountAndSay()//pendiente
         {
             var Atoi = stringAlg.CountAndSay(15);
             Assert.IsTrue(true);
@@ -447,7 +456,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.Trap(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==3);
         }
 
         [TestMethod]
@@ -455,7 +464,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.Candy(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==27);
         }
 
         [TestMethod]
@@ -463,14 +472,14 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.MaxWaterVolume(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==20);
         }
 
         [TestMethod]
         public void GeneratePascalTriangle()
         {
             var Atoi = stringAlg.GeneratePascalTriangle(15);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Count == 15);
         }
 
         [TestMethod]
@@ -479,7 +488,7 @@ namespace StringAlgorithmsTests
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             int[] arr2 = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.CanCompleteCircuit(arr,arr2);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==0);
         }
         
         [TestMethod]
@@ -488,18 +497,17 @@ namespace StringAlgorithmsTests
             string path = "(1-(4-5))";
 
             var Atoi = stringAlg.Calculate(path);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi == 2);
         }
 
         [TestMethod]
-        public void GroupAnagrams()
+        public void GroupAnagrams() // pendiente
         {
 
             string[] ss = {
-                "usted",
-                "me",
-                "regaló",
-                "la vida"
+                "Torchwood ",
+                "Doctor Who"
+
             };
             var Atoi = stringAlg.GroupAnagrams(ss);
             Assert.IsTrue(true);
@@ -508,17 +516,17 @@ namespace StringAlgorithmsTests
         [TestMethod]
         public void ShortestPalindrome()
         {
-            string path = "(1-(4-5))";
+            string path = "aabab";
 
             var Atoi = stringAlg.ShortestPalindrome(path);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Equals("babaabab"));
         }
 
         [TestMethod]
         public void ComAddeArea()
         {
             var Atoi = stringAlg.ComAddeArea(1,2,3,4,5,6,7,8);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==8);
         }
 
         [TestMethod]
@@ -526,7 +534,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.SummaryRanges(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Count==6);
         }
 
         [TestMethod]
@@ -534,7 +542,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.IncreasingTriplet(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi);
         }
 
         [TestMethod]
@@ -553,7 +561,7 @@ namespace StringAlgorithmsTests
                 12
             };
             var Atoi = Implementation.IsReachable(arr,40);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi);
         }
 
         [TestMethod]
@@ -563,7 +571,7 @@ namespace StringAlgorithmsTests
 
             var Atoi = Implementation.ReverseVowels(path);
             Assert.IsTrue(true);
-        }
+        }//Auxiliar de swap
 
         [TestMethod]
         public void Swap()
@@ -572,16 +580,16 @@ namespace StringAlgorithmsTests
             char[] charr = path.ToCharArray();
 
             var Atoi = Implementation.Swap(charr,0,path.Length-1);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi[9].Equals('M'));
         }
 
         [TestMethod]
         public void GeneratePossibleNextMoves()
         {
-            string path = "Murcielago";
+            string path = "+-";
 
             var Atoi = stringAlg.GeneratePossibleNextMoves(path);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Count==0);
         }
 
         [TestMethod]
@@ -589,7 +597,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.MissingMathNumber(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==-2);
         }
 
         [TestMethod]
@@ -597,7 +605,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.MissingBitNumber(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==12);
         }
 
         [TestMethod]
@@ -605,7 +613,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.MissingBinaryNumber(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==4);
         }
 
         [TestMethod]
@@ -615,7 +623,7 @@ namespace StringAlgorithmsTests
             string ar = "real fun";
 
             var Atoi = stringAlg.IsAnagram(arr,ar);
-            Assert.IsTrue(true);
+            Assert.IsTrue(!Atoi);
         }
 
         [TestMethod]
@@ -623,7 +631,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.TopKFrequent(arr,2);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Count==2);
         }
 
         [TestMethod]
@@ -631,7 +639,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.FindPeakElement(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==9);
         }
 
         [TestMethod]
@@ -641,7 +649,7 @@ namespace StringAlgorithmsTests
             string ar = "fun";
 
             var Atoi = stringAlg.WordPattern(ar, arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(!Atoi);
         }
 
         [TestMethod]
@@ -649,7 +657,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr = { 1, 2, 3, 3, 0, 5, 6, 8, 10, 12 };
             var Atoi = stringAlg.HIndex(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==5);
         }
 
         [TestMethod]
@@ -661,7 +669,7 @@ namespace StringAlgorithmsTests
                 "cat"
             };
             var Atoi = stringAlg.PalindromePairs(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Count==0);
         }
 
         [TestMethod]
@@ -671,7 +679,7 @@ namespace StringAlgorithmsTests
             string ar = "fun";
 
             var Atoi = stringAlg.IsOneEditDistance(ar, arr);
-            Assert.IsTrue(true);
+            Assert.IsFalse(Atoi);
         }
 
         [TestMethod]
@@ -681,7 +689,7 @@ namespace StringAlgorithmsTests
             string ar = "fun";
 
             var Atoi = stringAlg.IsScramble(ar, arr);
-            Assert.IsTrue(true);
+            Assert.IsFalse(Atoi);
         }
 
         [TestMethod]
@@ -689,7 +697,7 @@ namespace StringAlgorithmsTests
         {
             var Atoi = stringAlg.NumberToWords(99);
             var Atoi2 = stringAlg.Int2Str(99);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Equals("Ninety Nine"));
         }
 
         [TestMethod]
@@ -709,7 +717,7 @@ namespace StringAlgorithmsTests
                 "corriendo tras de mí"
             };
             var Atoi = stringAlg.FullJustify(arr,15);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Count==4);
         }
 
         [TestMethod]
@@ -719,7 +727,7 @@ namespace StringAlgorithmsTests
         
 
             var Atoi = stringAlg.RemoveInvalidParentheses(arr);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi[1].Equals("funeral"));
         }
 
         [TestMethod]
@@ -728,7 +736,7 @@ namespace StringAlgorithmsTests
             int[] arr = { 1, 2, 3, 3, 0, 5, 6, 8, 10, 12 };
             int[] arr2 = { 1, 2, 3, 3, 0, 5, 6, 7, 11, 15, 8, 10, 12 };
             var Atoi = stringAlg.Intersection(arr,arr2);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Length==9);
         }
 
         [TestMethod]
@@ -736,7 +744,7 @@ namespace StringAlgorithmsTests
         {
             int[] arr2 = { 1, 2, 3, 3, 0, 5, 6, 7, 11, 15, 8, 10, 12 };
             var Atoi = stringAlg.MaxSlidingWindow(arr2,5);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi.Length==9);
         }
 
         [TestMethod]
@@ -750,11 +758,11 @@ namespace StringAlgorithmsTests
             }
           
             var Atoi = stringAlg.Next(123, 5);
-            Assert.IsTrue(true);
+            Assert.IsTrue(Atoi==123);
         }
 
         [TestMethod]
-        public void GuessNumber()
+        public void GuessNumber()// pendiente
         {
             var Atoi = stringAlg.GuessNumber( 5);
             Assert.IsTrue(true);

@@ -422,7 +422,7 @@ namespace StringAlgorithms
 
         public int[] Merge(int[] A, int m, int[] B, int n)
         {
-            
+            Array.Resize(ref A, A.Length + B.Length);
             while (m > 0 && n > 0)
             {
                 if (A[m - 1] > B[n - 1])
@@ -465,7 +465,7 @@ namespace StringAlgorithms
                 }
                 else if (map.Values.ToList().Contains(curr))
                 {
-                    if (!stack.Any() && map[stack.Peek()] == curr)
+                    if (stack.Any() && map[stack.Peek()] == curr)
                     {
                         stack.Pop();
                     }
@@ -476,7 +476,7 @@ namespace StringAlgorithms
                 }
             }
 
-            return stack.Any();
+            return !stack.Any();
         }
 
         public static int LongestValidParentheses(String s)
@@ -494,7 +494,7 @@ namespace StringAlgorithms
                 }
                 else
                 {
-                    if (stack.Any() || stack.Peek()[1] == 1)
+                    if (!stack.Any() || stack.Peek()[1] == 1)
                     {
                         int[] a = { i, 1 };
                         stack.Push(a);
@@ -503,7 +503,7 @@ namespace StringAlgorithms
                     {
                         stack.Pop();
                         int currentLen = 0;
-                        if (stack.Any())
+                        if (!stack.Any())
                         {
                             currentLen = i + 1;
                         }
@@ -684,7 +684,7 @@ namespace StringAlgorithms
 
             while (index < len)
             {
-                if (stack.Any())
+                if (!stack.Any())
                     return false;
 
                 char temp = stack.Pop();
@@ -1081,7 +1081,7 @@ namespace StringAlgorithms
 
                         while (currentMap[sub] > map[sub])
                         {
-                            String left = s.Substring(start, len - start);
+                            String left = s.Substring(start, len);
                             currentMap.Add(left, currentMap[left] - 1);
 
                             count--;
@@ -1093,8 +1093,8 @@ namespace StringAlgorithms
                         {
                             result.Add(start); 
 
-                            String left = s.Substring(start,len -  start);
-                            currentMap.Add(left, currentMap[left] - 1);
+                            String left = s.Substring(start,len);
+                            currentMap[left] = currentMap[left] - 1;
                             count--;
                             start = start + len;
                         }
@@ -1433,7 +1433,7 @@ namespace StringAlgorithms
             while (i < height.Length)
             {
                 //push index to stack when the current height is larger than the previous one
-                if (stack.Any() || height[i] >= height[stack.Peek()])
+                if (!stack.Any() || height[i] >= height[stack.Peek()])
                 {
                     stack.Push(i);
                     i++;
@@ -1443,17 +1443,17 @@ namespace StringAlgorithms
                     //calculate max value when the current height is less than the previous one
                     int p = stack.Pop();
                     int h = height[p];
-                    int w = stack.Any() ? i : i - stack.Peek() - 1;
+                    int w = !stack.Any() ? i : i - stack.Peek() - 1;
                     max = Math.Max(h * w, max);
                 }
 
             }
 
-            while (!stack.Any())
+            while (stack.Any())
             {
                 int p = stack.Pop();
                 int h = height[p];
-                int w = stack.Any() ? i : i - stack.Peek() - 1;
+                int w = !stack.Any() ? i : i - stack.Peek() - 1;
                 max = Math.Max(h * w, max);
             }
 
@@ -1520,8 +1520,8 @@ namespace StringAlgorithms
 
         public int CompareVersion(String version1, String version2)
         {
-            string[] arr1 = version1.Split(new char[] { '\\' , ',' });
-            string[] arr2 = version2.Split(new char[] { '\\' , ',' });
+            string[] arr1 = version1.Split('.');
+            string[] arr2 = version2.Split('.');
 
             int i = 0;
             while (i < arr1.Length || i < arr2.Length)
@@ -1558,65 +1558,71 @@ namespace StringAlgorithms
             return 0;
         }
 
-        public string Simplify(string A)
+        public string Simplify(string path)
         {
-            Stack<string> st = new Stack<string>();
+            Stack<string> stack = new Stack<string>();
 
-            string dir;
-
-            string res = "/";
-
-            int len_A = A.Length;
-
-            for (int i = 0; i < len_A; i++)
+            while (path.Length > 0 && path[path.Length - 1] == '/')
             {
-
-                dir = "";
-
-                while (A[i] == '/')
-                    i++;
-
-                while (i < len_A && A[i] != '/')
-                {
-                    dir = dir + (A[i]);
-                    i++;
-                }
-
-
-                if (dir.CompareTo("..") == 0)
-                {
-                    if (!st.Any())
-                        st.Pop();
-                }
-
-
-                else if (dir.CompareTo(".") == 0)
-                    continue;
-
-                else if (dir.Length != 0)
-                    st.Push(dir);
+                path = path.Substring(0, path.Length - 1);
             }
 
-            Stack<string> st1 = new Stack<string>();
-            while (!st.Any())
+            int start = 0;
+            for (int i = 1; i < path.Length; i++)
             {
-                st1.Push(st.First());
-                st.Pop();
+                if (path[i] == '/')
+                {
+                    stack.Push(path.Substring(start, i-start));
+                    start = i;
+                }
+                else if (i == path.Length - 1)
+                {
+                    stack.Push(path.Substring(start));
+                }
             }
 
-            while (!st1.Any())
+            LinkedList<String> result = new LinkedList<String>();
+            int back = 0;
+            while (stack.Any())
             {
-                string temp = st1.First();
+                String top = stack.Pop();
 
-                if (st1.Count != 1)
-                    res = temp + "/" + res;
+                if (top.Equals("/.") || top.Equals("/"))
+                {
+                    //nothing
+                }
+                else if (top.Equals("/.."))
+                {
+                    back++;
+                }
                 else
-                    res = temp + res;
-
-                st1.Pop();
+                {
+                    if (back > 0)
+                    {
+                        back--;
+                    }
+                    else
+                    {
+                        result.AddFirst(top);
+                    }
+                }
             }
 
-            return res;
+            if (!result.Any())
+            {
+                return "/";
+            }
+
+            StringBuilder sb = new StringBuilder();
+            while (result.Any())
+            {
+                String s = result.First();
+                result.RemoveFirst();
+                sb.Append(s);
+            }
+
+            return sb.ToString();
+            
         }
 
         public int[] SearchRange(int[] nums, int target)
@@ -1691,28 +1697,40 @@ namespace StringAlgorithms
             String result = "1";
             int i = 1;
 
-            while (i < n)
-            {
-                StringBuilder sb = new StringBuilder();
-                int count = 1;
-                for (int j = 1; j < result.Length; j++)
-                {
-                    if (result[j] == result[j - 1])
-                    {
-                        count++;
-                    }
-                    else
-                    {
-                        sb.Append(count);
-                        sb.Append(result[j - 1]);
-                        count = 1;
-                    }
-                }
 
-                sb.Append(count);
-                sb.Append(result[result.Length - 1]);
-                result = sb.ToString();
+            StringBuilder sb = new StringBuilder();
+            while (i < n.ToString().Length)
+            {
+                int count = 1;
+
+                if (n.ToString().Length == 1)
+                {
+                    result = count.ToString() + n.ToString();
+                    
+                }
+                else
+                {
+                    for (int j = i; j < n.ToString().Length; j++)
+                    {
+                        if (n.ToString()[j] == n.ToString()[j - 1])
+                        {
+                            count++;
+                        }
+                        else
+                        {
+                            sb.Append(count);
+                            sb.Append(n.ToString()[j-1]);
+                            count = 1;
+                        }
+                    }
+
+                    sb.Append(count);
+                    sb.Append(n.ToString()[i]);
+                    result = sb.ToString();
+                    
+                }
                 i++;
+
             }
 
             return result;
@@ -1933,7 +1951,7 @@ namespace StringAlgorithms
                     else
                     {
                         List<String> T = new List<String>();
-                        while (!stack.Any())
+                        while (stack.Any())
                         {
                             String top = stack.Pop();
                             if (top.Equals("("))
@@ -1972,7 +1990,7 @@ namespace StringAlgorithms
             }
 
             List<String> t = new List<String>();
-            while (!stack.Any())
+            while (stack.Any())
             {
                 String elem = stack.Pop();
                 t.Insert(0, elem);
@@ -1998,7 +2016,6 @@ namespace StringAlgorithms
         public List<List<String>> GroupAnagrams(String[] strs)
         {
             List<List<String>> result = new List<List<String>>();
-
             Dictionary<String, List<String>> map = new Dictionary<String, List<String>>();
             foreach (String str in strs)
             {
@@ -2046,12 +2063,11 @@ namespace StringAlgorithms
                 return s;
 
             String suffix = s.Substring(i);
-
-            StringBuilder sb = new StringBuilder(suffix);
             
-            String prefix = new StringBuilder(suffix).ToString().ToCharArray().Reverse().ToString();
-            String mid = ShortestPalindrome(s.Substring(0, i));
-            return prefix + mid + suffix;
+            StringBuilder sb = new StringBuilder(suffix);
+            String prefix = Reverse(sb.ToString());
+            String mid = s.Substring(0, i);
+            return prefix +mid + sb.ToString();
         }
 
         public int ComAddeArea(int A, int B, int C, int D, int E, int F, int G, int H)
@@ -2208,7 +2224,7 @@ namespace StringAlgorithms
             String vowels = "aeiouAEIOU";
             
             int lo = 0;
-            int hi = st.Length;
+            int hi = st.Length-1;
             char[] ch = st.ToCharArray();
 
             while (lo < hi)
