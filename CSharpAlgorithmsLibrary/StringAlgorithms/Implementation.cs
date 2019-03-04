@@ -446,7 +446,7 @@ namespace StringAlgorithms
             return A;
         }
 
-        public bool IsValid(String s)
+        public bool IsValidParenthesis(String s)
         {
             Dictionary<char, char> map = new Dictionary<char, char>();
             map.Add('(', ')');
@@ -479,6 +479,30 @@ namespace StringAlgorithms
             return !stack.Any();
         }
 
+        private static bool IsValidParenthesisV2(string exp)
+        {
+            Stack<char> stack = new Stack<char>();
+            var caracteres = exp.ToCharArray();
+            char x;
+
+            for (int i = 0; i < exp.Length; i++)
+            {
+                x = caracteres[i];
+                if (x == '(')
+                    stack.Push(x);
+                else if (x == ')')
+                {
+                    if (stack.Count == 0)
+                        return false;
+                    else if (stack.Peek() == '(')
+                        stack.Pop();
+                    else
+                        return false;
+                }
+            }
+
+            return stack.Count == 0;
+        }
         public static int LongestValidParentheses(String s)
         {
             Stack<int[]> stack = new Stack<int[]>();

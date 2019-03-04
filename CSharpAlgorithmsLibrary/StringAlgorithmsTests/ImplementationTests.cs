@@ -125,12 +125,12 @@ namespace StringAlgorithmsTests
         }
 
         [TestMethod]
-        public void IsValid()
+        public void IsValidParenthesis()
         {
             string s = "{}{}{}{}{}{[]]]][";
             string t = "{}[]()";
-            var isntValid = stringAlg.IsValid(s);
-            var isValid = stringAlg.IsValid(t);
+            var isntValid = stringAlg.IsValidParenthesis(s);
+            var isValid = stringAlg.IsValidParenthesis(t);
             Assert.IsTrue(isValid);
             Assert.IsFalse(isntValid);
         }
