@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixAlgorithms", "MatrixA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatrixAlgorithmsTests", "MatrixAlgorithmsTests\MatrixAlgorithmsTests.csproj", "{9DB7CD4A-E702-4810-AF0B-FCD2D8B77309}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayAlgorithms", "ArrayAlgorithms\ArrayAlgorithms.csproj", "{1BE0BBC7-A344-4FFE-BCDE-1D2D7A0CC930}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9DB7CD4A-E702-4810-AF0B-FCD2D8B77309}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DB7CD4A-E702-4810-AF0B-FCD2D8B77309}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DB7CD4A-E702-4810-AF0B-FCD2D8B77309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BE0BBC7-A344-4FFE-BCDE-1D2D7A0CC930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BE0BBC7-A344-4FFE-BCDE-1D2D7A0CC930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BE0BBC7-A344-4FFE-BCDE-1D2D7A0CC930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BE0BBC7-A344-4FFE-BCDE-1D2D7A0CC930}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
